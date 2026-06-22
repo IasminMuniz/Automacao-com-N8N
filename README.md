@@ -1,22 +1,20 @@
-Arquitetura do Fluxo e Nós Utilizados
-O arquivo Relatórios.json estrutura a esteira de dados em 4 etapas principais:
+# 📂 Minhas Automações no N8N
 
-1. Gatilhamento e Coleta de Dados:
-   - Schedule Trigger: Configurado para rodar de forma agendada a cada mês.
-   - Obter Data Filtragem (Set): Define a janela temporal de análise estática (inicialmente configurada para 2025-08-01).
-   - Obter dados (Google Sheets): Puxa a listagem bruta da planilha atividades_empresa.
-   
-2. Tratamento e Filtragem:
-   - Filter: Filtra as linhas da planilha, mantendo apenas os registros com datas posteriores ao período definido.
-   - Aggregate: Agrupa todos os itens filtrados em um único payload JSON estruturado para consumo da inteligência artificial.
-   
-3. Camada de Inteligência Artificial (LangChain):
-   - Análise (Chain LLM): Atua como analista estratégico para a diretoria, processando os dados brutos, avaliando riscos de tarefas atrasadas e gerando recomendações sem formatação complexa (asteriscos).
-   - Resumo (Chain LLM): Consome a saída da análise anterior para criar um resumo condensado em tópicos e Markdown, ideal para o corpo de e-mails executivos.
-   - Google Gemini Chat Model: O motor de IA (lmChatGoogleGemini) que abastece ambos os prompts anteriores.
+Este diretório centraliza os fluxos de trabalho e integrações que criei utilizando o **n8n** para automatizar processos, conectar ferramentas e gerar relatórios inteligentes.
 
-4. Formatação e Publicação:
-   - Conversão em HTML: Transforma o Markdown estruturado do nó Resumo em tags HTML limpas.
-   - Criar e Adicionar ao Documento (Google Docs): Cria um arquivo dinâmico nomeado com data/hora na pasta do Drive e insere o texto completo da Análise Executiva.
-   - Send a message (Gmail): Dispara o e-mail para o destinatário final contendo o resumo já convertido em HTML corporativo.
- 
+
+As automações estão divididas por pastas. Cada pasta contém o arquivo `.json` do fluxo pronto para importar e a sua respetiva explicação:
+
+- Um fluxo mensal que recolhe dados de uma planilha (Google Sheets), gera uma análise estratégica usando Inteligência Artificial (Google Gemini), cria um documento formatado (Google Docs) e envia o resumo por e-mail (Gmail).
+
+---
+
+## 🚀 Como usar estes fluxos no teu n8n
+
+Se quiseres reutilizar ou testar qualquer uma destas automações:
+
+1. Entra na pasta do fluxo desejado (ex: `Relatorios`).
+2. Abre o arquivo `.json` e **copia todo o código** lá de dentro.
+3. No painel do teu **n8n**, cria um fluxo novo (*New Workflow*).
+4. Clica no meio do ecrã e pressiona **`Ctrl + V`** (ou `Cmd + V` no Mac). O fluxo vai aparecer desenhado no ecrã na hora!
+5. Liga as tuas próprias contas e credenciais nos nós que tiverem um aviso.
